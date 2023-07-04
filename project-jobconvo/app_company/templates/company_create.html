@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Registrar | Companhia</title>
+</head>
+
+<body>
+    <!-- Messages -->
+    <div class="row-sm col-sm-6 mt-2" style="display: flex; justify-content: center">
+        {% include 'partials/_messages.html' %}
+    </div>
+    <!-- End Messages -->
+
+    <div class="container-sm" style=" margin-top: 8rem">
+        <h3>Cadastrar empresa</h3>
+        <div class="row-sm">
+            <form method="post" style="margin-top: 1rem;" action="{% url 'app_company:company_create' %}">
+                {% csrf_token %}
+                    <!--Model Company-->
+                    <div class="form-group">
+                        <label for="id_name">Nome:</label>
+                        <input type="text" class="form-control" name="name" placeholder="Nome da Companhia" maxlength="255" required id="id_name">
+                    </div>
+                    
+                    <!--Model COmpany-->
+
+                    <!--Model ContactCompany-->
+                    
+                    <div class="form-group">
+                        <label for="id_manager">Nome do responsável:</label>
+                        <input type="text" class="form-control" name="manager" placeholder="Nome do responsável" maxlength="45" required id="id_manager">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">E-mail:</label>
+                        <input type="email" class="form-control" name="email" placeholder="E-mail da empresa" maxlength="254" required id="id_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_cellphone">Número de celular:</label>
+                        <input type="text" class="form-control" name="cellphone" placeholder="Número do celular" maxlength="14" required id="id_cellphone">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_commercial_phone">Número comercial:</label>
+                        <input type="text" class="form-control" name="commercial_phone" placeholder="Número fixo comercial" maxlength="12" required id="id_commercial_phone">
+                    </div>
+                    
+                    <!--Model ContactCompany-->
+
+                    <input type="submit" class="btn btn-primary btn-block" value="Cadastrar">
+            </form>
+        </div>
+    </div>
+
+    <!--JS-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+    <!--End JS-->
+</body>
+
+</html>

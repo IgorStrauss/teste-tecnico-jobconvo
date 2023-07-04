@@ -1,9 +1,12 @@
-from .views import home_company_view
 from django.urls import path
+
+from .views import CompanyCreateView, HomeCompanyView
 
 app_name = 'app_company'
 
 
 urlpatterns = [
-    path("", home_company_view, name="home_company"),
+    path("", HomeCompanyView.as_view(), name="home_company"),
+    path("register-company/", CompanyCreateView.as_view(),
+         name="company_create"),
 ]
