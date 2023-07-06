@@ -16,3 +16,9 @@ pytest:
 
 coverage:
 	pytest --cov=. --cov-report=html --cov-report
+
+makemigrations:
+	python project-jobconvo/manage.py makemigrations
+
+migrate:
+	python project-jobconvo/manage.py migrate

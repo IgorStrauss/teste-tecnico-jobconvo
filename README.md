@@ -13,3 +13,6 @@ Tecnologias utilizadas:
  - HTML
  - CSS
  
+Rotas:
+    - Empresa:
+     - localhost/company/register-company/

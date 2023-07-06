@@ -7,7 +7,7 @@ from .models import Company, ContactCompany, Jobs, Requirements
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ['name']
+        fields = ['name', 'cnpj']
 
 
 class ContactCompanyForm(forms.ModelForm):
@@ -29,6 +29,30 @@ class RequirementsForm(ModelForm):
 
 
 class JobsForm(ModelForm):
+
     class Meta:
         model = Jobs
-        fields = []
+        fields = [
+            'company',
+            'title',
+            'requirements',
+            'minimum_schooling',
+            'salary_range',
+            'description',
+        ]
+
+
+class JobsUpdateForm(ModelForm):
+
+    class Meta:
+        model = Jobs
+        fields = [
+            'title',
+            'requirements',
+            'minimum_schooling',
+            'salary_range',
+            'description',
+        ]
+        widgets = {
+            'description': forms.Textarea(attrs={'cols': 40, 'rows': 10}),
+        }

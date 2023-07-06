@@ -12,13 +12,14 @@
 </head>
 
 <body>
+    {% include 'partials/_nav.html' %}
     <!-- Messages -->
     <div class="row-sm col-sm-6 mt-2" style="display: flex; justify-content: center">
         {% include 'partials/_messages.html' %}
     </div>
     <!-- End Messages -->
 
-    <div class="container-sm" style=" margin-top: 8rem">
+    <div class="container-sm" style=" margin-top: 4rem">
         <h3>Cadastrar empresa</h3>
         <div class="row-sm">
             <form method="post" style="margin-top: 1rem;" action="{% url 'app_company:company_create' %}">
@@ -28,6 +29,11 @@
                         <label for="id_name">Nome:</label>
                         <input type="text" class="form-control" name="name" placeholder="Nome da Companhia" maxlength="255" required id="id_name">
                     </div>
+                    <div class="form-group">
+                        <label for="id_cnpj">CNPJ:</label>
+                        <input type="text" class="form-control" name="cnpj" placeholder="Número do CNPJ" maxlength="14" required id="id_cnpj">
+                    </div>
+
                     
                     <!--Model COmpany-->
 

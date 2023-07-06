@@ -1,0 +1,37 @@
+<div class="container-sm" style="max-width: 96rem; background-color: #696969">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" style="color:#fff" href="{% url 'home' %}">MarquesIgor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:home_company' %}">Home empresa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:company_create' %}">Cadastrar empresa</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:list_company' %}">Listar empresas</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:requirements' %}">Cadastrar requisito</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:list_jobs' %}">Listar vagas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:home_company' %}">Home Candidato</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:company_create' %}">Cadastrar candidato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#DAA520" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+</div>
