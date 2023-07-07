@@ -2,12 +2,17 @@ from datetime import datetime
 
 from django.db import models
 
-from .service import SALARY_CHOICES
+from .service import MINIMUM_SCHOOLING_CHOICES, SALARY_CHOICES
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=255, unique=True, null=False)
-    created_at = models.DateTimeField(default=datetime.now, blank=True)
+    name = models.CharField(max_length=255, unique=True, null=False,
+                            verbose_name='Empresa')
+    cnpj = models.CharField(max_length=14, unique=True,
+                            null=False, default='0000000000000xx',
+                            verbose_name='CNPJ')
+    created_at = models.DateTimeField(
+        default=datetime.now, blank=True, verbose_name='Cadastrado em')
 
     def __str__(self):
         return self.name
@@ -19,7 +24,7 @@ class Company(models.Model):
 
 class ContactCompany(models.Model):
     company = models.ForeignKey(
-        Company, on_delete=models.DO_NOTHING, null=False)
+        Company, on_delete=models.DO_NOTHING, null=False, verbose_name='Empresa')
     manager = models.CharField(
         max_length=45, null=False, verbose_name='Nome do responsável')
     email = models.EmailField(unique=True, null=False, verbose_name='E-mail')
@@ -33,7 +38,7 @@ class ContactCompany(models.Model):
 
     @property
     def format_cellphone(self):
-        return f"({self.cellphone[:2]}) {self.cellphone[2]}{self.cellphone[3:7]}-{self.cellphone[7:]}"
+        return f"({self.cellphone[:2]}) {self.cellphone[2]}.{self.cellphone[3:7]}-{self.cellphone[7:]}"
 
     @property
     def format_phone_commercial(self):
@@ -42,7 +47,7 @@ class ContactCompany(models.Model):
 
 class Requirements(models.Model):
     name = models.CharField(
-        max_length=45, null=False, verbose_name='Tipo de requisito')
+        max_length=45, unique=True, null=False, verbose_name='Tipo de requisito')
 
     def __str__(self):
         return self.name
@@ -59,6 +64,9 @@ class Jobs(models.Model):
                              verbose_name='Título da vaga')
     requirements = models.ManyToManyField(
         Requirements, verbose_name='Requisitos')
+    minimum_schooling = models.CharField(
+        max_length=45, null=True, choices=MINIMUM_SCHOOLING_CHOICES,
+        verbose_name='Escolaridade')
     salary_range = models.CharField(
         max_length=45, null=False, choices=SALARY_CHOICES,
         verbose_name='Faixa salarial')
