@@ -5,13 +5,13 @@ from django.db.models import Q
 from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from .forms import (CompanyForm, ContactCompanyForm, JobsForm, JobsUpdateForm,
                     RequirementsForm)
-from .models import Company, ContactCompany, Jobs, Requirements
+from .models import Company, Jobs, Requirements
 
 
 class HomeCompanyView(TemplateView):
@@ -85,6 +85,7 @@ class JobsCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         company_id = self.kwargs['company_id']
         context['comp'] = get_object_or_404(Company, id=company_id)
+        context['requirements_list'] = Requirements.objects.all()
         return context
 
     def form_valid(self, form):
@@ -94,10 +95,17 @@ class JobsCreateView(CreateView):
         return super().form_valid(form)
 
 
-class JobsListView(ListView):
+class JobsActiveListView(ListView):
     model = Jobs
     template_name = 'jobs_list.html'
-    queryset = Jobs.objects.all()
+    queryset = Jobs.objects.filter(is_active=True).order_by('-created_at')
+    context_object_name = 'jobs_list'
+
+
+class JobsInactiveListView(ListView):
+    model = Jobs
+    template_name = 'jobs_list_inactive.html'
+    queryset = Jobs.objects.filter(is_active=False)
     context_object_name = 'jobs_list'
 
 
@@ -106,6 +114,12 @@ class JobsUpdateView(UpdateView):
     form_class = JobsUpdateForm
     template_name = 'jobs_update.html'
     success_url = reverse_lazy('app_company:home_company')
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['requirements_list'] = Requirements.objects.all()
+        context['jobs'] = self.object
+        return context
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         messages.success(self.request, 'Vaga atualizada com sucesso!')
@@ -117,6 +131,12 @@ class RequirementsView(CreateView):
     form_class = RequirementsForm
     template_name = 'jobs_requirements.html'
     success_url = reverse_lazy('app_company:home_company')
+    context_object_name = 'requirements_list'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['requirements_list'] = Requirements.objects.all()
+        return context
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         messages.success(self.request, 'Requisito cadastrados com sucesso!')

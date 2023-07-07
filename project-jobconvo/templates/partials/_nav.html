@@ -20,7 +20,10 @@
               <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:requirements' %}">Cadastrar requisito</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:list_jobs' %}">Listar vagas</a>
+                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:list_jobs_active' %}">Listar vagas ativas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:list_jobs_inactive' %}">Listar vagas canceladas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:home_company' %}">Home Candidato</a>

@@ -19,91 +19,43 @@
     <!-- End Messages -->
 
     <div class="container-sm" style="border: 1px solid yellow">
-        <h1>Home - Companhia</h1>
-        <div class="row">
-            <!--Div left-->
-            <div class="col-sm-5" style="border: 1px solid red;">
-                <h2>Listar empresas por CNPJ</h2>
-                <!--Search company-->
-                <div class="container-sm">
-                    <form class="form-inline my-2" method="GET" action="#">
-                        <input class="form-control mr-sm-2" type="search" name="cnpj" placeholder="CNPJ"
-                            aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar empresa</button>
-                    </form>
-                </div>
-                <!--End search company-->
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Empresa</th>
-                            <th scope="col">CNPJ</th>
-                        </tr>
+        <h1>Home - Resumo de vagas</h1>
+        <div class="row-sm">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrição da vaga</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">QTD. candidatos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><a href="#" class="btn btn-primary btn-sm">ID</a></th>
+                    <td>desenvolvedor</td>
+                    <td>nomeabcdeas</td>
+                    <td>254</td>
+                  </tr>
+                  <!--modelo-->
+                  <tr>
+                    <th scope="row"><a href="#" class="btn btn-primary btn-sm">ID</a></th>
+                    <td>desenvolvedor</td>
+                    <td>nomeabcdeas</td>
+                    <td>254</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><a href="#" class="btn btn-primary btn-sm">ID</a></th>
+                    <td>desenvolvedor</td>
+                    <td>nomeabcdeas</td>
+                    <td>254</td>
+                  </tr>
 
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">nome da empresa</th>
-                            <th scope="row">cnpj da empresa</th>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="col-sm-3" style=" display: inline;">
-                    <button class="btn btn-outline-primary mb-2" type="submit">Editar</button>
-                    <button class="btn btn-outline-success mb-2" type="submit">Cadastrar vaga</button>
-                </div>
-            </div>
-            <!--Div right-->
-            <div class="col-sm-7" style="border:1px solid black;">
-                <h2>Listar vagas por CNPJ</h2>
-                <!--Search company-->
-                <!--
-                <div class="container-sm">
-                    <form class="form-inline my-2 my-lg-0">
-                        <label for="termo">Buscar por CNPJ:</label>
-                        <input class="form-control mr-sm-2" type="search" name="termo" id="termo" value="{{ request.GET.termo }}" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                      </form>
-                  
-                </div>
-                -->
-                <!--End search company-->
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">ID</th>
-                            <th scope="col">Empresa</th>
-                            <th scope="col">CNPJ</th>
-                        </tr>
 
-                    </thead>
-                    <tbody>
-                        {% if companies %}
-                        {% for company in companies %}
-                        <tr>
-                            <th scope="row"><a href="#" class="btn btn-primary btn-sm">Editar</a></th>
-                            <th scope="row">{{ company.id }}</th>
-                            <th scope="row">{{ company.name }}</th>
-                            <th scope="row">{{ company.cnpj }}</th>
-                        </tr>
-                        {% endfor %}
-                        {% endif %}
-                    </tbody>
-                    <thead>
-                        <tr>
-                            <th scope="col">Título</th>
-                            <th scope="col">Escolaridade</th>
-                            <th scope="col">Salário</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="col">Requisitos</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                  <!--Fim modelo-->
+                </tbody>
+              </table>
+              
         </div>
 
     </div>

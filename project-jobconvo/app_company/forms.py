@@ -30,6 +30,12 @@ class RequirementsForm(ModelForm):
 
 class JobsForm(ModelForm):
 
+    requirements = forms.ModelMultipleChoiceField(
+        queryset=Requirements.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
     class Meta:
         model = Jobs
         fields = [
@@ -43,6 +49,13 @@ class JobsForm(ModelForm):
 
 
 class JobsUpdateForm(ModelForm):
+    is_active = forms.BooleanField(label='Status da vaga', required=False)
+
+    requirements = forms.ModelMultipleChoiceField(
+        queryset=Requirements.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
 
     class Meta:
         model = Jobs
@@ -52,6 +65,7 @@ class JobsUpdateForm(ModelForm):
             'minimum_schooling',
             'salary_range',
             'description',
+            'is_active'
         ]
         widgets = {
             'description': forms.Textarea(attrs={'cols': 40, 'rows': 10}),

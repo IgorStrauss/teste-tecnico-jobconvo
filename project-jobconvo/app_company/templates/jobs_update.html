@@ -36,22 +36,21 @@
 
 
                     </div>
-
                     <div class="form-group">
-                        <label for="id_requirements">Requisitos</label>
-                        <select name="requirements" class="form-control" value="{{ jobs.requirements }}" id="id_requirements" multiple>
-                            <option value="16">python</option>
-
-                            <option value="17" selected>Java</option>
-
-                            <option value="18">Javascript</option>
-
-                        </select>
-
-
-
+                        <label for="">Requirements</label>
+                        <div id="id_requirements">
+                            {% for requirement in requirements_list %}
+                                <div>
+                                    <label for="id_requirements_{{ forloop.counter0 }}">
+                                        <input type="checkbox" name="requirements" value="{{ requirement.id }}" id="id_requirements_{{ forloop.counter0 }}"
+                                               {% if requirement in jobs.requirements.all %}checked{% endif %}>
+                                        {{ requirement.name }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-
+                                            
                     <div class="form-group">
                         <label for="id_minimum_schooling">Escolaridade</label>
                         <select name="minimum_schooling" class="form-control" value="{{ jobs.minimum_schooling }}"  id="id_minimum_schooling">
@@ -98,11 +97,20 @@
                         <label for="id_description">Descrição da vaga</label>
                         <textarea name="description" class="form-control" cols="40" rows="5" maxlength="255" id="id_description">{{ jobs.description }}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="id_is_active">Status da vaga</label>
+                        <div>
+                            <input type="checkbox" name="is_active" value="True" {% if jobs.is_active %}checked{% endif %}>
+                            <label for="id_is_active">Ativo</label>
+                        </div>
+                    </div>
+                                        
                     
 
                 </div>
                 <!--button-->
-                <button class="btn btn-outline-primary" type="submit">Enviar</button>
+                <button class="btn btn-primary mb-3" type="submit">Enviar</button>
         </form>
     </div>
 
