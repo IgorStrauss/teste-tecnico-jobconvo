@@ -1,0 +1,33 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Atualizar | Experiencia </title>{% endblock title %}
+
+{% block content %}
+<div class="container-sm">
+    <!--Nav-->
+    <div class="row-sm text-center">
+        <h2>Atualizar experiência de</h2>
+        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+    </div>
+    <!--Nav-->
+    <!--Form-->
+    <div class="form">
+        <form action="{% url 'app_candidate:update_experience' candidate_id=user.id  pk=experience.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_namae">Função ou cargo:</label>
+                <input type="text" class="form-control" name="name" autocomplete="off" maxlength="20" value="{{ experience.name }}" id="id_name">
+            </div>
+
+            <div class="form-group">
+                <label for="id_description">Descrição:</label>
+                <textarea type="text" class="form-control" name="description" autocomplete="off" cols="40" rows="5" maxlength="255" id="id_description"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Atualizar">
+        </form>
+        <a href="{% url 'app_candidate:home_candidate' %}" class="btn btn-warning btn-block mt-3">Não quero atualizar</a>
+    </div>
+    <!--Form-->
+</div>
+
+{% endblock content %}

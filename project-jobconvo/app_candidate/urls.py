@@ -4,6 +4,7 @@ from .service_jobs import JobsListView
 from .views import (CandidateCreateView, CandidateDeleteView,
                     CandidateListView, CandidateLoginView, CandidateLogoutView,
                     CandidateUpdateView, ExperienceCreateView,
+                    ExperienceListView, ExperienceUpdateView,
                     HomeCandidateView)
 
 app_name = 'app_candidate'
@@ -26,6 +27,10 @@ urlpatterns = [
     path("logout-candidato/", CandidateLogoutView.as_view(),
          name="logout_candidate"),
     path("vaga-disponivel/<int:jobs_id>/",
-         JobsListView.as_view(), name="list_jobs_candidate",)
+         JobsListView.as_view(), name="list_jobs_candidate",),
+    path("listar-experiencias/<int:candidate_id>/",
+         ExperienceListView.as_view(), name="list_experience"),
+    path("atualizar-experiencia/candidato/<int:candidate_id>/experiencia/<int:pk>/",
+         ExperienceUpdateView.as_view(), name="update_experience"),
 
 ]

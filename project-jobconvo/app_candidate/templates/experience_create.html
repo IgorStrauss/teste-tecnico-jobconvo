@@ -1,23 +1,36 @@
 {% extends 'base_candidates.html' %}
 
-{% block title %}<title>Registrar | Candidatos</title>{% endblock title %}
+{% block title %}<title>Experiência | Candidatos</title>{% endblock title %}
 
 {% block content %}
+{% include 'partials/_nav_candidate.html' %}
 
 <div class="container-sm mt-2">
-    <h2 class="text-center">Registrar candidato</h2>
+    <h2 class="text-center">Registrar experiência</h2>
 
     <div class="container-sm mt-5">
-<!--
-        <div class="form">
-            <form action="{% url 'app_candidate:create_experience' candidate_id %}" method="post">
-                <div class="form-group">
 
+        <div class="form">
+            <form action="{% url 'app_candidate:create_experience' candidate_id=user_id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_name">Função ou cargo:</label>
+                    <input type="text" class="form-control" name="name" maxlength="255" id="id_name"
+                        placeholder="Nome da função ou cargo exercida" autocomplete="off">
                 </div>
+                <div class="form-group">
+                    <label for="id_description">Experiência</label>
+                    <textarea type="textarea" class="form-control" name="description" cols="40" rows="10"
+                        id="id_description" placeholder="Insira somente uma experiência por registro."></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary btn-block" value="Registrar">
             </form>
+
         </div>
--->
-{{ form.as_p }}
+
     </div>
+</div>
+
+</div>
 </div>
 {% endblock content %}

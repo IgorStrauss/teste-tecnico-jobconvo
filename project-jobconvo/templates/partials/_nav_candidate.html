@@ -1,6 +1,6 @@
 <div class="container-sm" style="max-width: 96rem; background-color: #696969">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" style="color:#fff" href="{% url 'home' %}">MarquesIgor</a>
+        <a class="navbar-brand" style="color:#fff" href="{% url 'app_candidate:home_candidate' %}">MarquesIgor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,10 +11,14 @@
                   <a class="nav-link btn btn-primary btn-sm mx-1" style="color:#fff" href="">Minhas vagas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-primary btn-sm mx-1" style="color:#fff" href="">Atualizar perfil</a>
+                    <a class="nav-link btn btn-primary btn-sm mx-1" style="color:#fff" href="{% url 'app_candidate:update_candidate' pk=user.pk  %}">Atualizar perfil</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link btn btn-primary btn-sm mx-1" style="color:#fff" href="">Minhas experiências</a>
+                    <a class="nav-link btn btn-primary btn-sm mx-1" style="color:#fff" href="{% url 'app_candidate:create_experience' candidate_id=user.pk  %}">Cadastrar experiências</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link btn btn-primary btn-sm mx-1" style="color:#fff" href="{% url 'app_candidate:list_experience' candidate_id=user.pk  %}">Minhas experiências</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link btn btn-warning btn-sm mx-1" style="color:#DAA520, texy-color:#000000" href="{% url 'app_candidate:logout_candidate' %}">Logout</a>
