@@ -1,0 +1,48 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Job {{ jobs_list.id }}</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container-sm" style="margin-top: 10rem;">
+    <div class="table">
+        <table class="table table-striped text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Criada em</th>
+                    <th><a href="{% url 'app_candidate:home_candidate' %}" class="btn btn-outline-info btn-sm">&Larr; &twoheadleftarrow;
+                        &#x0219E; HOME</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ jobs_list.id }}</td>
+                    <td>{{ jobs_list.company }}</td>
+                    <td>{{ jobs_list.title }}</td>
+                    <td>{{ jobs_list.created_at }}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--Description-->
+    <div class="row-sm text-center">
+        <h4>Descrição da vaga</h4>
+        <p>{{ jobs_list.description }}</p><hr>
+    </div>
+    <!--Requirements-->
+    <div class="row-sm text-center">
+        <h4>Requisitos da vaga</h4>
+        {% for requirement in jobs_list.requirements.all %}
+        <p style="display:inline; font-size:1.2rem;">{{ requirement.name }}</p>
+        {% if not forloop.last %}/ {% endif %}
+        {% endfor %}
+    </div><hr>
+<a href="#" type="submit" class="btn btn-success btn-block">Quero me candidatar!</a>
+
+</div>
+
+{% endblock content %}

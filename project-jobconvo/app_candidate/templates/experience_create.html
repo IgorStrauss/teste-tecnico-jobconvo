@@ -1,0 +1,23 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Registrar | Candidatos</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container-sm mt-2">
+    <h2 class="text-center">Registrar candidato</h2>
+
+    <div class="container-sm mt-5">
+<!--
+        <div class="form">
+            <form action="{% url 'app_candidate:create_experience' candidate_id %}" method="post">
+                <div class="form-group">
+
+                </div>
+            </form>
+        </div>
+-->
+{{ form.as_p }}
+    </div>
+</div>
+{% endblock content %}

@@ -7,6 +7,7 @@ from django.forms.models import BaseModelForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from .forms import (CompanyForm, ContactCompanyForm, JobsForm, JobsUpdateForm,
@@ -73,6 +74,23 @@ class CompanyListView(ListView):
 #         else:
 #             context["companies"] = []
 #         return context
+
+
+class CompanyLoginView(View):
+
+    def login_candidate(self, request):
+        if request.method == 'POST':
+            if request.form['username'] == 'admin' and request.form['password'] == 'admin':
+                return HttpResponse('Login realizado com sucesso!')
+            messages.error(request, 'Login inválido!')
+            return HttpResponse('Login inválido!')
+
+    def get_success_url(self):
+        return reverse_lazy('app_company:home_company')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Login realizado com sucesso!')
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class JobsCreateView(CreateView):

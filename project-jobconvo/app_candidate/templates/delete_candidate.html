@@ -1,0 +1,20 @@
+{% extends 'base_candidates.html' %}
+{% block content %}
+
+<div class="container-sm">
+    <div class="container-sm col-lg-6"  style="margin-top: 10rem;">
+        <h4 class="text-center mt-5">Deletar usuário </h4>
+        <h5 class="text-center">{{user.first_name}} {{user.last_name}}</h5>
+        <h4 class="text-center">?</h4>
+    </div>
+        <div class="container-sm col-lg-6">
+            <form action="{% url 'app_candidate:delete_candidate' user.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger btn-block" value="Deletar">
+                </form>
+            <a href="{% url 'app_candidate:list_candidate' %}" type="submit" class="btn btn-warning btn-block mt-3">Não quero deletar.</a>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

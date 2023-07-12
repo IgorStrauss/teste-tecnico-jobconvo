@@ -1,0 +1,29 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Login | Candidatos</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container-sm mt-2">
+    <h2 class="text-center" style="margin-top: 10rem;">Login candidato {{ user }}</h2>
+    <div class="container-sm">
+        <form action="{% url 'app_candidate:login_candidate' %}" method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_username">E-mail:</label>
+                <input type="text" class="form-control" name="username" placeholder="E-mail" required id="username" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Senha:</label>
+                <input type="password" class="form-control" name="password" placeholder="Senha" maxlength="45" required id="password" autocomplete="off">
+                <span>O sistema diferencia letras maiusculas e minusculas</span>
+            </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Login">
+            <a href="{% url 'app_candidate:create_candidate' %}" class="btn btn-warning btn-block">Quero me cadastrar</a>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}
