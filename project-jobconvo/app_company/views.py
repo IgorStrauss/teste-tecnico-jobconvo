@@ -12,7 +12,7 @@ from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from .forms import (CompanyForm, ContactCompanyForm, JobsForm, JobsUpdateForm,
                     RequirementsForm)
-from .models import Company, Jobs, Requirements
+from .models import Application, Company, Jobs, Requirements
 
 
 class HomeCompanyView(TemplateView):
@@ -159,3 +159,10 @@ class RequirementsView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         messages.success(self.request, 'Requisito cadastrados com sucesso!')
         return super().form_valid(form)
+
+
+class ApplicationListView(ListView):
+    model = Application
+    template_name = 'application_list.html'
+    queryset = Application.objects.all()
+    context_object_name = 'application_list'

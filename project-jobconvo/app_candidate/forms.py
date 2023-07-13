@@ -1,3 +1,4 @@
+from app_company.models import Application
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
@@ -56,4 +57,13 @@ class ExperienceForm(ModelForm):
         fields = [
             'name',
             'description',
+        ]
+
+
+class ApplicationCreateForm(ModelForm):
+    class Meta:
+        model = Application
+        fields = [
+            'minimum_schooling_candidate',
+            'salary_range_candidate',
         ]

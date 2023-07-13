@@ -41,7 +41,7 @@
         {% if not forloop.last %}/ {% endif %}
         {% endfor %}
     </div><hr>
-<a href="#" type="submit" class="btn btn-success btn-block">Quero me candidatar!</a>
+<a href="{% url 'app_candidate:application_in_jobs' pk=user.id jobs_id=jobs_list.id %}" type="submit" class="btn btn-success btn-block">Quero me candidatar!</a>
 
 </div>
 

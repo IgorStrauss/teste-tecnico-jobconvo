@@ -1,6 +1,7 @@
 from django.urls import path
 
-from .service_jobs import JobsListView
+from .service_jobs import (ApplicationCreateView, JobsListView,
+                           ListJobsDetailView)
 from .views import (CandidateCreateView, CandidateDeleteView,
                     CandidateListView, CandidateLoginView, CandidateLogoutView,
                     CandidateUpdateView, ExperienceCreateView,
@@ -32,5 +33,7 @@ urlpatterns = [
          ExperienceListView.as_view(), name="list_experience"),
     path("atualizar-experiencia/candidato/<int:candidate_id>/experiencia/<int:pk>/",
          ExperienceUpdateView.as_view(), name="update_experience"),
-
+    path("vaga/<int:jobs_id>/", ListJobsDetailView.as_view(), name="list_job_id",),
+    path("aplicar-vaga/candidato/<int:pk>/vaga/<int:jobs_id>/",
+         ApplicationCreateView.as_view(), name="application_in_jobs")
 ]

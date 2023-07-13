@@ -126,7 +126,7 @@ class ExperienceCreateView(CreateView):
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         form.instance.user_id = self.kwargs['candidate_id']
-        messages.success(self.request, 'Requisito cadastrados com sucesso!')
+        messages.success(self.request, 'Experiência cadastrada com sucesso!')
         return super().form_valid(form)
 
 

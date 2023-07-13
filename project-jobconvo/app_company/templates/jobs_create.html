@@ -20,7 +20,7 @@
 
     <div class="container-sm">
         <h1>Home - Vagas</h1>
-        <form action="{% url 'app_company:jobs_create' company_id=comp.id %}" method="POST"
+        {% comment %} <form action="{% url 'app_company:jobs_create' company_id=comp.id %}" method="POST"
             enctype="multipart/form-data">
             <input type="hidden">
         {% csrf_token %}
@@ -113,7 +113,8 @@
             </div>
             <!--button-->
             <button class="btn btn-primary mb-3" type="submit">Cadastrar vaga</button>
-        </form>
+        </form> {% endcomment %}
+    {% include 'partials/_forms.html' %}
     </div>
 
     <!--JS-->
