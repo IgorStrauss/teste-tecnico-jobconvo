@@ -17,10 +17,11 @@ Tecnologias utilizadas:
  - HTML
  - CSS
  
-Rotas:
+Rota candidato:
     - Candidatos:
      - localhost/   -> Acesso para candidatos
 
-     
+ 
+Rota companhia: 
     - Companhia:
      - localhost/company/17arcyiekk/marques/96a014o8n8/igor/2023/   -> Acesso para companhia
