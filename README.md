@@ -14,5 +14,7 @@ Tecnologias utilizadas:
  - CSS
  
 Rotas:
-    - Empresa:
-     - localhost/company/register-company/
+    - Candidatos:
+     - localhost/   -> Acesso para candidatos
+    - Companhia:
+     - localhost/company/17arcyiekk/marques/96a014o8n8/igor/2023/   -> Acesso para companhia

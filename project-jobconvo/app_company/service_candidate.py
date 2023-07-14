@@ -60,7 +60,7 @@ class CandidateDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        candidate = context['candidate']
+        candidate = self.get_object()
         experiences = Experience.objects.filter(user=candidate)
         context['experiences'] = experiences
         return context
