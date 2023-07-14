@@ -18,6 +18,7 @@ from .models import Candidate, Experience
 
 
 class HomeCandidateView(LoginRequiredMixin, ListView):
+    """Home para candidatos após logados, renderizando a lista de vagas"""
     template_name = 'home_candidate.html'
     model = Jobs
     queryset = Jobs.objects.filter(is_active=True).order_by('-created_at')
@@ -32,6 +33,7 @@ class HomeCandidateView(LoginRequiredMixin, ListView):
 
 
 class CandidateCreateView(CreateView):
+    """Cadastro de candidatos no sistema"""
     model = Candidate
     form_class = CandidateForm
     template_name = 'create_candidate.html'
@@ -43,6 +45,7 @@ class CandidateCreateView(CreateView):
 
 
 class CandidateListView(LoginRequiredMixin, ListView):
+    """Listar todos os candidatos cadastrados"""
     model = User
     template_name = 'list_candidates.html'
     queryset = User.objects.all()
@@ -57,6 +60,7 @@ class CandidateListView(LoginRequiredMixin, ListView):
 
 
 class CandidateUpdateView(LoginRequiredMixin, UpdateView):
+    """Area para atualizar candidato_id"""
     model = User
     form_class = CandidateUpdateForm
     template_name = 'update_candidate.html'
@@ -80,6 +84,7 @@ class CandidateUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class CandidateLoginView(LoginView):
+    """Login para candidato"""
     form_class = AuthenticationForm
     template_name = 'login_candidate.html'
 
@@ -89,6 +94,7 @@ class CandidateLoginView(LoginView):
 
 
 class CandidateLogoutView(LogoutView):
+    """Logout para candidato"""
     success_url = reverse_lazy('app_candidate:home_candidate')
 
     def get_success_url(self) -> str:
@@ -97,6 +103,7 @@ class CandidateLogoutView(LogoutView):
 
 
 class CandidateDeleteView(LoginRequiredMixin, DeleteView):
+    """Deletar candidato por ID"""
     model = User
     template_name = 'delete_candidate.html'
     success_url = reverse_lazy('app_candidate:list_candidate')
@@ -114,6 +121,7 @@ class CandidateDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class ExperienceCreateView(CreateView):
+    """Gera uma atribuição de experiencia para candidato_id e experiencia_id"""
     model = Experience
     form_class = ExperienceForm
     template_name = 'experience_create.html'
@@ -131,6 +139,7 @@ class ExperienceCreateView(CreateView):
 
 
 class ExperienceListView(LoginRequiredMixin, ListView):
+    """Listar todas as experiencias cadastradas por candidato_id"""
     model = Experience
     template_name = 'list_experience.html'
     context_object_name = 'experience_list'
@@ -156,6 +165,7 @@ class ExperienceListView(LoginRequiredMixin, ListView):
 
 
 class ExperienceUpdateView(LoginRequiredMixin, UpdateView):
+    """Area para atualizar experiencia cadastrada por candidato_id"""
     model = Experience
     form_class = ExperienceForm
     template_name = 'update_experience.html'

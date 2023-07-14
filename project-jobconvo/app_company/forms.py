@@ -36,10 +36,14 @@ class JobsForm(ModelForm):
         required=False
     )
 
+    def __init__(self, company_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['requirements'].queryset = Requirements.objects.all()
+        self.company_id = company_id
+
     class Meta:
         model = Jobs
         fields = [
-            'company',
             'title',
             'requirements',
             'minimum_schooling',

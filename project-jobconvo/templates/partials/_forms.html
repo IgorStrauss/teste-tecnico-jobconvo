@@ -1,4 +1,4 @@
-<form 
+{% comment %} <form 
 action="{{ form_action }}"
 method="POST"
 enctype="multipart/form-data">
@@ -21,3 +21,39 @@ enctype="multipart/form-data">
 <!--button-->
 <button class="btn btn-outline-primary" type="submit">Enviar</button>
 </form>
+</div> {% endcomment %}
+
+{% load widget_tweaks %}
+
+<form action="{{ form_action }}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}      
+
+  <div class="form-content">
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+        {% if field.field.widget.input_type == 'checkbox' %}
+          <div class="form-check">
+            {{ field }}
+            <label class="form-check-label" for="{{ field.id_for_label }}"></label>
+          </div>
+        {% else %}
+          {{ field|add_class:'form-control' }}
+        {% endif %}
+
+        {{ field.errors }}
+
+        {% if field.help_text %}
+          <p class="help-text">{{ field.help_text }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!--button-->
+  <button class="btn btn-outline-primary" type="submit">Enviar</button>
+</form>
+
+  
+  

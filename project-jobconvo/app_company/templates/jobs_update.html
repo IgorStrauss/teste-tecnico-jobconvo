@@ -18,102 +18,12 @@
     </div>
     <!-- End Messages -->
 
-    <div class="container-sm">
+    <!--Formulario-->
+    <div class="container-sm mb-3">
         <h1>Atualizar - Vagas</h1>
-        <form action="{% url 'app_company:update_jobs' jobs.id %}" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="csrfmiddlewaretoken"
-                value="PyjGVCkvgsUPrfiGYQfXlAZ6zM2atxhx45GQKZ2pzeuRJ6DSe5PZsm4CAPAuGYX5">
-            <div class="form-content">
-
-                <div class="form-content">
-
-
-                    <div class="form-group">
-                        <label for="id_title">Título da vaga</label>
-                        <input type="text" name="title" class="form-control" value="{{ jobs.title }}" maxlength="255" required
-                            id="id_title">
-
-
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Requirements</label>
-                        <div id="id_requirements">
-                            {% for requirement in requirements_list %}
-                                <div>
-                                    <label for="id_requirements_{{ forloop.counter0 }}">
-                                        <input type="checkbox" name="requirements" value="{{ requirement.id }}" id="id_requirements_{{ forloop.counter0 }}"
-                                               {% if requirement in jobs.requirements.all %}checked{% endif %}>
-                                        {{ requirement.name }}
-                                    </label>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                                            
-                    <div class="form-group">
-                        <label for="id_minimum_schooling">Escolaridade</label>
-                        <select name="minimum_schooling" class="form-control" value="{{ jobs.minimum_schooling }}"  id="id_minimum_schooling">
-                            <option value="">---------</option>
-
-                            <option value="Ensino Fundamental">Ensino Fundamental</option>
-
-                            <option value="Ensino Médio" selected>Ensino Médio</option>
-
-                            <option value="Tecnólogo">Tecnólogo</option>
-
-                            <option value="Ensino Superior">Ensino Superior</option>
-
-                            <option value="Pós / MBA / Mestrado">Pós / MBA / Mestrado</option>
-
-                            <option value="Doutorado">Doutorado</option>
-
-                        </select>
-
-
-
-                    </div>
-
-                    <div class="form-group">
-                        <label for="id_salary_range">Faixa salarial</label>
-                        <select name="salary_range" class="form-control" value="{{ jobs.salary_range }}" id="id_salary_range">
-                            <option value="">---------</option>
-
-                            <option value="Até R$ 1.000,00">Até R$ 1.000,00</option>
-
-                            <option value="De R$ 1.000,01 a R$ 2.000,00">De R$ 1.000,01 a R$ 2.000,00</option>
-
-                            <option value="De R$ 2.000,01 a R$ 3.000,00" selected>De R$ 2.000,01 a R$ 3.000,00</option>
-
-                            <option value="Acima de R$ 3.000,00">Acima de R$ 3.000,00</option>
-
-                        </select>
-
-
-
-                    </div>
-
-                    <div class="form-group">
-                        <label for="id_description">Descrição da vaga</label>
-                        <textarea name="description" class="form-control" cols="40" rows="5" maxlength="255" id="id_description">{{ jobs.description }}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="id_is_active">Status da vaga</label>
-                        <div>
-                            <input type="checkbox" name="is_active" value="True" {% if jobs.is_active %}checked{% endif %}>
-                            <label for="id_is_active">Ativo</label>
-                        </div>
-                    </div>
-                                        
-                    
-
-                </div>
-                <!--button-->
-                <button class="btn btn-primary mb-3" type="submit">Enviar</button>
-        </form>
+        {% include 'partials/_forms.html' %}
     </div>
-
+    <!--Formulario-->
     </div>
     </div>
 

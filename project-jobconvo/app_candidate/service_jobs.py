@@ -4,17 +4,16 @@ from app_company.models import Application, Jobs
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.forms.models import BaseModelForm
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpRequest
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView
 
 from .forms import ApplicationCreateForm
-from .models import Candidate
 
 
 class JobsListView(LoginRequiredMixin, DetailView):
+    """Listar todas as vagas ativas para os candidatos logados"""
     model = Jobs
     template_name = 'jobs/jobs_list_candidate.html'
     context_object_name = 'jobs_list'
@@ -33,6 +32,7 @@ class JobsListView(LoginRequiredMixin, DetailView):
 
 
 class ListJobsDetailView(LoginRequiredMixin, DetailView):
+    """Listar vaga ativas por ID para os candidatos logados"""
     model = Jobs
     template_name = 'jobs/jobs_detail.html'
     context = 'jobs'
@@ -55,6 +55,7 @@ class ListJobsDetailView(LoginRequiredMixin, DetailView):
 
 
 class ApplicationCreateView(LoginRequiredMixin, CreateView):
+    """Gera correspondencia entre candidato_id e vaga_id"""
     model = Application
     form_class = ApplicationCreateForm
     template_name = 'jobs/application_create.html'

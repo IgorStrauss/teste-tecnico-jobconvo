@@ -1,8 +1,6 @@
 from typing import Any, Dict
 
 from django.contrib import messages
-from django.db.models import Q
-from django.db.models.query import QuerySet
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -16,7 +14,7 @@ from .models import Application, Company, Jobs, Requirements
 
 
 class HomeCompanyView(TemplateView):
-    template_name = 'home_company.html'
+    template_name = 'home_company-teste.html'
 
 
 class CompanyCreateView(CreateView):
@@ -93,22 +91,42 @@ class CompanyLoginView(View):
         return HttpResponseRedirect(self.get_success_url())
 
 
+# class JobsCreateView(CreateView):
+#     model = Jobs
+#     form_class = JobsForm
+#     template_name = 'jobs_create.html'
+#     success_url = reverse_lazy('app_company:home_company')
+
+#     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+#         context = super().get_context_data(**kwargs)
+#         company_id = self.kwargs['company_id']
+#         context['comp'] = get_object_or_404(Company, id=company_id)
+#         context['requirements_list'] = Requirements.objects.all()
+#         return context
+
+#     def form_valid(self, form):
+#         company_id = self.kwargs['company_id']
+#         form.instance.company_id = company_id
+#         messages.success(self.request, 'Vaga cadastrada com sucesso!')
+#         return super().form_valid(form)
+
+
 class JobsCreateView(CreateView):
     model = Jobs
     form_class = JobsForm
     template_name = 'jobs_create.html'
     success_url = reverse_lazy('app_company:home_company')
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
         company_id = self.kwargs['company_id']
-        context['comp'] = get_object_or_404(Company, id=company_id)
-        context['requirements_list'] = Requirements.objects.all()
-        return context
+        kwargs['company_id'] = company_id
+        return kwargs
 
     def form_valid(self, form):
         company_id = self.kwargs['company_id']
-        form.instance.company_id = company_id
+        company = get_object_or_404(Company, id=company_id)
+        form.instance.company = company
         messages.success(self.request, 'Vaga cadastrada com sucesso!')
         return super().form_valid(form)
 

@@ -1,5 +1,8 @@
 from django.urls import path
 
+from .service_candidate import (ApplicationCompanyListJobView,
+                                ApplicationCompanyListView,
+                                CandidateDetailView)
 from .views import (ApplicationListView, CompanyCreateView, CompanyListView,
                     HomeCompanyView, JobsActiveListView, JobsCreateView,
                     JobsInactiveListView, JobsUpdateView, RequirementsView)
@@ -8,7 +11,7 @@ app_name = 'app_company'
 
 
 urlpatterns = [
-    path("", HomeCompanyView.as_view(), name="home_company"),
+    path("", HomeCompanyView.as_view(), name="home_company133"),
     path("register-company/", CompanyCreateView.as_view(),
          name="company_create"),
     path("register-jobs/<int:company_id>/",
@@ -24,4 +27,11 @@ urlpatterns = [
          name="list_jobs_inactive"),
     path("selective-jobs/", ApplicationListView.as_view(),
          name="selective_jobs"),
+    path("list-jobs-company/", ApplicationCompanyListView.as_view(),
+         name="home_company"),
+    path("list-jobs-company/<int:pk>/",
+         ApplicationCompanyListJobView.as_view(),
+         name="list_filter_job_company"),
+    path("candidate-detail/<int:pk>/",
+         CandidateDetailView.as_view(), name="candidate_detail"),
 ]

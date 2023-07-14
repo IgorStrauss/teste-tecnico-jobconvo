@@ -1,0 +1,60 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title> candidato {{ candidate.first_name }}</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container-sm">
+
+    <div class="container-sm mt-2">
+        <h2 class="text-center mt-2">Detalhes de {{ candidate.first_name }} {{ candidate.last_name }}</h2>
+    
+        <div class="container-sm mt-3">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"><a href="{% url 'app_company:home_company' %}" class="btn btn-outline-info btn-sm"> &Larr; &twoheadleftarrow;
+                            &#x0219E;
+                            HOME</a></th>
+                        <th scope="col"></th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Sobrenome</th>
+                        <th scope="col">E-mail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+    
+                        <td></td>
+    
+                        <td>{{ candidate.id }}</td>
+                        <td>{{ candidate.username }}</td>
+                        <td>{{ candidate.first_name }}</td>
+                        <td>{{ candidate.last_name }}</td>
+                        <td>{{ candidate.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                {% if experiences %}
+                {% for experience in experiences %}
+                  <div>
+                    <h3>{{ experience.name }}</h3>
+                    <p>{{ experience.description }}</p>
+                  </div><hr>
+                {% endfor %}
+                {% else %}
+                <h2>{{ candidate.first_name }} {{ candidate.last_name }} nao tem experiência cadastrada.</h2>
+                {% endif %}
+              </div>
+                    </div>
+    
+    </div>
+    
+
+</div>
+
+{% endblock content %}
