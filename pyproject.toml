@@ -10,9 +10,12 @@ packages = [{include = "teste_python_jobconvo"}]
 python = "^3.8"
 django = "^4.2.3"
 django-pytest = "^0.2.0"
-pytest = "^7.4.0"
+pytest = "7.3.0"
 django-select2 = "^8.1.2"
 django-widget-tweaks = "^1.4.12"
+pytest-cov = "4.0.0"
+pytest-django = "4.5.2"
+coverage = "7.2.3"
 
 
 [tool.poetry.group.dev.dependencies]

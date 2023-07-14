@@ -43,7 +43,7 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": [
-        "project_jobconvo"
+        "project-jobconvo"
     ],
     "python.analysis.diagnosticSeverityOverrides": {
         "reportUnknownMemberType": "none",
