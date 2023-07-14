@@ -26,10 +26,10 @@ Rota candidato:
  
 Rota companhia: 
     - Companhia:
-     - localhost/company/17arcyiekk/marques/96a014o8n8/igor/2023/   -> Acesso para companhia
+     - localhost:8000/company/17arcyiekk/marques/96a014o8n8/igor/2023/   -> Acesso para companhia
 
 #### Módulo companhia
-localhost/company/17arcyiekk/marques/96a014o8n8/igor/2023/
+localhost:8000/company/17arcyiekk/marques/96a014o8n8/igor/2023/
 
     Acessar este link inicial, e sendo a primeira vez, como empresa administradora
     clicar em cadastrar.
@@ -49,7 +49,7 @@ localhost/company/17arcyiekk/marques/96a014o8n8/igor/2023/
     em cadastrar vaga.
 
 #### Módulo candidato
-localhost
+localhost:8000/
 
     Acessar este link inicial, e sendo a primeira vez, como candidato, clicar em
     cadastrar
