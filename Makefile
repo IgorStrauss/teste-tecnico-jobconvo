@@ -3,6 +3,7 @@
 start:
 	python project-jobconvo/manage.py makemigrations
 	python project-jobconvo/manage.py migrate
+	pip install -r requirements.txt
 	python project-jobconvo/manage.py runserver 
 
 run:
