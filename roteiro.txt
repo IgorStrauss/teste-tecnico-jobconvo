@@ -1,6 +1,13 @@
+cnpj = 82975536000197
+username = marquesigor
+email = contato@marquesigor.com.br
 
-Candidato: Class Candidate
-           Class Experience - manytomany    
+rota para acesso de companhia:
+
+/company/17arcyiekk/marques/96a014o8n8/igor/2023/
 
 
 
+rota para acessar Candidatos
+
+localhost:8000/

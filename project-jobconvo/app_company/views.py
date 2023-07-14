@@ -1,23 +1,54 @@
 from typing import Any, Dict
 
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView, LogoutView
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
-from .forms import (CompanyForm, ContactCompanyForm, JobsForm, JobsUpdateForm,
-                    RequirementsForm)
+from .forms import (CompanyForm, CompanyOwnerLoginForm,
+                    CompanyOwnerRegisterForm, ContactCompanyForm, JobsForm,
+                    JobsUpdateForm, RequirementsForm)
 from .models import Application, Company, Jobs, Requirements
 
 
 class HomeCompanyView(TemplateView):
-    template_name = 'home_company-teste.html'
+    template_name = 'home_company_pre.html'
 
 
-class CompanyCreateView(CreateView):
+class CompanyOwnerRegisterView(CreateView):
+    model = User
+    form_class = CompanyOwnerRegisterForm
+    template_name = 'company_owner_register.html'
+    success_url = reverse_lazy('app_company:login_company_owner')
+
+
+class CompanyOwnerLoginView(LoginView):
+    """Login para companhia"""
+    form_class = AuthenticationForm
+    template_name = 'login_company_owner.html'
+
+    def get_success_url(self) -> str:
+        messages.success(self.request, 'Login realizado com sucesso!')
+        return reverse_lazy('app_company:home_company')
+
+
+class CompanyOwnerLogoutView(LoginRequiredMixin, LogoutView):
+    """Logout para companhia"""
+    success_url = reverse_lazy('app_company:login_company_owner')
+
+    def get_success_url(self) -> str:
+        messages.success(self.request, 'Desconectado com sucesso!')
+        return reverse_lazy('app_company:login_company_owner')
+
+
+class CompanyCreateView(LoginRequiredMixin, CreateView):
     model = Company
     form_class = CompanyForm
     template_name = 'company_create.html'
@@ -47,71 +78,36 @@ class CompanyCreateView(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class CompanyListView(ListView):
+class CompanyListView(LoginRequiredMixin, ListView):
     model = Company
     template_name = 'company_list.html'
     queryset = Company.objects.all()
     context_object_name = 'company_list'
 
 
-# class ListRegistrationCompany(CompanyListView):
-#     model = Company
-#     template_name = 'home_company.html'
+class CompanyUpdateView(LoginRequiredMixin, UpdateView):
+    model = Company
+    form_class = CompanyForm
+    template_name = 'company_update.html'
+    success_url = reverse_lazy('app_company:home_company')
 
-#     def get_queryset(self) -> QuerySet[Any]:
-#         queryset = super().get_queryset()
-#         if termo := self.request.GET.get('termo'):
-#             queryset = queryset.filter(Q(code__exact=termo))
-#         return queryset
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        if not self.request.user.is_authenticated:
+            messages.warning(self.request, 'Você precisa estar logado!')
+            return redirect(self.get_login_url())
+        return super().dispatch(request, *args, **kwargs)
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         if termo := self.request.GET.get('termo'):
-#             company = self.get_queryset().first()
-#             context["companies"] = [company] if company else []
-#         else:
-#             context["companies"] = []
-#         return context
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        messages.success(self.request, 'Cadastro atualizado com sucesso!')
+        return super().form_valid(form)
 
-
-class CompanyLoginView(View):
-
-    def login_candidate(self, request):
-        if request.method == 'POST':
-            if request.form['username'] == 'admin' and request.form['password'] == 'admin':
-                return HttpResponse('Login realizado com sucesso!')
-            messages.error(request, 'Login inválido!')
-            return HttpResponse('Login inválido!')
-
-    def get_success_url(self):
-        return reverse_lazy('app_company:home_company')
-
-    def form_valid(self, form):
-        messages.success(self.request, 'Login realizado com sucesso!')
-        return HttpResponseRedirect(self.get_success_url())
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['company_id'] = self.kwargs['pk']
+        return context
 
 
-# class JobsCreateView(CreateView):
-#     model = Jobs
-#     form_class = JobsForm
-#     template_name = 'jobs_create.html'
-#     success_url = reverse_lazy('app_company:home_company')
-
-#     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-#         context = super().get_context_data(**kwargs)
-#         company_id = self.kwargs['company_id']
-#         context['comp'] = get_object_or_404(Company, id=company_id)
-#         context['requirements_list'] = Requirements.objects.all()
-#         return context
-
-#     def form_valid(self, form):
-#         company_id = self.kwargs['company_id']
-#         form.instance.company_id = company_id
-#         messages.success(self.request, 'Vaga cadastrada com sucesso!')
-#         return super().form_valid(form)
-
-
-class JobsCreateView(CreateView):
+class JobsCreateView(LoginRequiredMixin, CreateView):
     model = Jobs
     form_class = JobsForm
     template_name = 'jobs_create.html'
@@ -131,21 +127,21 @@ class JobsCreateView(CreateView):
         return super().form_valid(form)
 
 
-class JobsActiveListView(ListView):
+class JobsActiveListView(LoginRequiredMixin, ListView):
     model = Jobs
     template_name = 'jobs_list.html'
     queryset = Jobs.objects.filter(is_active=True).order_by('-created_at')
     context_object_name = 'jobs_list'
 
 
-class JobsInactiveListView(ListView):
+class JobsInactiveListView(LoginRequiredMixin, ListView):
     model = Jobs
     template_name = 'jobs_list_inactive.html'
     queryset = Jobs.objects.filter(is_active=False)
     context_object_name = 'jobs_list'
 
 
-class JobsUpdateView(UpdateView):
+class JobsUpdateView(LoginRequiredMixin, UpdateView):
     model = Jobs
     form_class = JobsUpdateForm
     template_name = 'jobs_update.html'
@@ -162,7 +158,7 @@ class JobsUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class RequirementsView(CreateView):
+class RequirementsView(LoginRequiredMixin, CreateView):
     model = Requirements
     form_class = RequirementsForm
     template_name = 'jobs_requirements.html'
@@ -177,10 +173,3 @@ class RequirementsView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         messages.success(self.request, 'Requisito cadastrados com sucesso!')
         return super().form_valid(form)
-
-
-class ApplicationListView(ListView):
-    model = Application
-    template_name = 'application_list.html'
-    queryset = Application.objects.all()
-    context_object_name = 'application_list'

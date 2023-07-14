@@ -1,10 +1,14 @@
 from datetime import datetime
 
-from app_candidate.models import Candidate
 from django.contrib.auth.models import User
 from django.db import models
 
 from .service import MINIMUM_SCHOOLING_CHOICES, SALARY_CHOICES
+
+
+class CompanyOwner(models.Model):
+    """Vinculada ao model User para criação do objeto Companhia Responsável"""
+    ...
 
 
 class Company(models.Model):

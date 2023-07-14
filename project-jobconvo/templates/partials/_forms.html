@@ -39,7 +39,7 @@ enctype="multipart/form-data">
             <label class="form-check-label" for="{{ field.id_for_label }}"></label>
           </div>
         {% else %}
-          {{ field|add_class:'form-control' }}
+          {% render_field field|attr:"autocomplete:off" class+="form-control" %}
         {% endif %}
 
         {{ field.errors }}

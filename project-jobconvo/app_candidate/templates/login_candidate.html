@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container-sm mt-2">
-    <h2 class="text-center" style="margin-top: 10rem;">Login candidato {{ user }}</h2>
+    <h2 class="text-center" style="margin-top: 10rem;">Login candidato</h2>
     <div class="container-sm">
         <form action="{% url 'app_candidate:login_candidate' %}" method="post">
             {% csrf_token %}
