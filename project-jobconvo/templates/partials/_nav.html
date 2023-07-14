@@ -1,6 +1,6 @@
 <div class="container-sm" style="max-width: 96rem; background-color: #696969">
     <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" style="color:#fff" href="{% url 'home' %}">MarquesIgor</a>
+        <a class="navbar-brand" style="color:#fff" href="#">MarquesIgor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,13 +26,10 @@
               <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:list_jobs_inactive' %}">Listar vagas canceladas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:home_company' %}">Home Candidato</a>
+                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_candidate:home_candidate' %}">Home Candidato</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color:#fff; border-right:1px solid black" href="{% url 'app_company:company_create' %}">Cadastrar candidato</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="color:#DAA520" href="#">Logout</a>
+              <a class="nav-link" style="color:#DAA520" href="{% url 'app_company:logout_company_owner' %}">Logout</a>
             </li>
           </ul>
         </div>

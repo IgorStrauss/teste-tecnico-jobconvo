@@ -1,0 +1,97 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Vaga {{ jobs.id }}</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container sm mt-3">
+    <!--Nav-->
+    <div class="row-sm text-center">
+    <h2>Detalhes da vaga : {{ jobs.title }}</h2>
+    </div>
+    <!--Nav-->
+    <!--Detalhes da vaga-->
+    <form action="#" method="POST"
+    enctype="multipart/form-data">
+    <input type="hidden">
+{% csrf_token %}
+    <div class="form-content">
+
+
+
+        <div class="form-group">
+            <label for="id_title">Título da vaga</label>
+            <input type="text" name="title" class="form-control" value="{{ jobs.title }}"  maxlength="255" required id="id_title" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="">Requirements</label>
+            <div id="id_requirements">
+                {% for requirement in jobs.requirements.all %}
+                <p>-> {{ requirement.name }}</p>
+            {% endfor %}
+            </div>
+            </div>
+
+        <!-- <div class="form-group">
+            <label for="id_minimum_schooling">Escolaridade</label>
+            <select name="minimum_schooling" class="form-control" required id="id_minimum_schooling">
+                <option value="" selected>Selecione a escolaridade</option>
+
+                <option value="Ensino Fundamental">Ensino Fundamental</option>
+
+                <option value="Ensino Médio">Ensino Médio</option>
+
+                <option value="Tecnólogo">Tecnólogo</option>
+
+                <option value="Ensino Superior">Ensino Superior</option>
+
+                <option value="Pós / MBA / Mestrado">Pós / MBA / Mestrado</option>
+
+                <option value="Doutorado">Doutorado</option>
+
+            </select>
+
+        </div> -->
+
+        <!-- <div class="form-group">
+            <label for="id_salary_range">Faixa salarial</label>
+            <select name="salary_range" class="form-control" required id="id_salary_range">
+                <option value="" selected>Selecione pretensão salarial</option>
+
+                <option value="Até R$ 1.000,00">Até R$ 1.000,00</option>
+
+                <option value="De R$ 1.000,01 a R$ 2.000,00">De R$ 1.000,01 a R$ 2.000,00</option>
+
+                <option value="De R$ 2.000,01 a R$ 3.000,00">De R$ 2.000,01 a R$ 3.000,00</option>
+
+                <option value="Acima de R$ 3.000,00">Acima de R$ 3.000,00</option>
+
+            </select>
+
+        </div> -->
+
+        <div class="form-group">
+            <label for="id_description">Descrição da vaga</label>
+            <textarea name="description" class="form-control"  id="id_description" readonly>{{ jobs.description }}</textarea>
+        
+    </div>
+
+</div>
+<!--button-->
+</form>
+<a href="{% url 'app_candidate:application_in_jobs' pk=user.id jobs_id=jobs.id %}" type="submit" class="btn btn-primary btn-block">Quero esta vaga</a>
+
+
+<!--Detalhes da vaga-->
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+

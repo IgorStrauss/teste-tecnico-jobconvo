@@ -1,0 +1,52 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Listar | Candidatos</title>{% endblock title %}
+
+{% block content %}
+
+
+<div class="container-sm mt-2">
+    <h2 class="text-center mt-2">Lista de candidatos</h2>
+
+    <div class="container-sm mt-3">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"><a href="{% url 'app_candidate:home_candidate' %}" class="btn btn-outline-info btn-sm"> &Larr; &twoheadleftarrow;
+                        &#x0219E;
+                        HOME</a></th>
+                    <th scope="col"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if candidate_list %}
+                {% for candidate in candidate_list %}
+                <tr>
+                    <td  style=" width:6rem"><a href="{% url 'app_candidate:delete_candidate' candidate.pk %}" class="btn btn-danger btn-sm">Deletar</a></td>
+
+                    <td  style=" width:6rem"><a href="{% url 'app_candidate:update_candidate' candidate.pk %}" class="btn btn-primary btn-sm">Editar</a></td>
+
+                    <td>{{ candidate.id }}</td>
+                    <td>{{ candidate.username }}</td>
+                    <td>{{ candidate.first_name }}</td>
+                    <td>{{ candidate.last_name }}</td>
+                    <td>{{ candidate.email }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4"><h2>Não há candidatos</h2></td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+{% endblock content %}

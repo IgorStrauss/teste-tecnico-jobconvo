@@ -1,0 +1,41 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Atualizar | Candidato</title>{% endblock title %}
+
+{% block content %}
+{% include 'partials/_nav_candidate.html' %}
+
+
+{% block messages %}
+{% include 'partials/_messages.html' %}
+{% endblock messages %}
+
+<div class="container-sm mt-2">
+    <h2 class="text-center">Atualizar candidato {{ candidate.first_name }} {{ candidate.last_name }}</h2>
+
+    <div class="container-sm mt-5">
+
+        <div class="form">
+            <form action="{% url 'app_candidate:update_candidate' pk=user.pk %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_first_name">Nome:</label>
+                    <input type="text" class="form-control" name="first_name" autocomplete="off" maxlength="20" value="{{ user.first_name }}"
+                        id="id_first_name">
+                </div>
+                <div class="form-group">
+                    <label for="id_last_name">Sobrenome:</label>
+                    <input type="text" class="form-control" name="last_name" autocomplete="off" maxlength="20" value="{{ user.last_name }}" id="id_last_name">
+                </div>
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    <input type="email" class="form-control" name="email" autocomplete="off" maxlength="320" value="{{ user.email }}" id="id_email">
+                </div>
+                <input type="submit" class="btn btn-primary btn-block" value="Atualizar">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

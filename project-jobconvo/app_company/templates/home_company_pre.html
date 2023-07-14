@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <title>Home</title>
+    <title>Company</title>
 </head>
 <body style="background-color: #836fff;">
     {% include 'partials/_messages.html' %}
@@ -15,10 +15,10 @@
         <div class="container-sm">
             <div class="card text-center" style="background-color: #ffdab9;">
                 <div class="card-body">
-                  <h5 class="card-title">Página inicial para candidatos</h5>
+                  <h5 class="card-title">Página inicial para companhia</h5>
                   <p class="card-text">Para acessar todo conteúdo, é necessário fazer login.</p>
-                  <a href="{% url 'app_candidate:login_candidate' %}" class="btn btn-primary my-2">Já tem cadastro conosco, clique aqui!</a>
-                  <a href="{% url 'app_candidate:create_candidate' %}" class="btn btn-warning my-2">Ainda não tem cadastro, clique aqui!</a>
+                  <a href="{% url 'app_company:login_company_owner' %}" class="btn btn-primary my-2">Já tem cadastro conosco, clique aqui!</a>
+                  <a href="{% url 'app_company:register_owner_company' %}" class="btn btn-warning my-2">Ainda não tem cadastro, clique aqui!</a>
 
                 </div>
               </div>

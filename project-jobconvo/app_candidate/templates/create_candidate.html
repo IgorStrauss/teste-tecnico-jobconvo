@@ -1,0 +1,71 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Registrar | Candidatos</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container-sm mt-2">
+    <h2 class="text-center">Registrar candidato</h2>
+    
+    <div class="form-content">
+        <form action="{% url 'app_candidate:create_candidate' %}"     enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_first_name">Nome</label>
+                <input type="text" name="first_name" class="form-control" autocomplete="off" maxlength="30" minlength="3" required id="id_first_name" placeholder="Nome">
+            </div>
+            <div class="form-group">
+                <label for="id_last_name">Sobrenome</label>
+                <input type="text" name="last_name" class="form-control" autocomplete="off" maxlength="30" minlength="3" required id="id_last_name" placeholder="Sobrenome">
+            </div>
+            <div class="form-group">
+                <label for="id_username">Usuário</label>
+                <input type="text" name="username" class="form-control" autocomplete="off" maxlength="150" autofocus required id="id_username" placeholder="Utilize seu email como usuario">
+            </div>
+            <div class="form-group">
+                <label for="id_email">Email</label>
+                <input type="email" name="email" class="form-control" autocomplete="off" maxlength="320" required id="id_email" placeholder="E-mail">
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Senha</label>
+                <input type="password" name="password1" class="form-control" autocomplete="off" autocomplete="new-password" required id="id_password1" placeholder="Senha">
+                <span>Sua senha precisa ter no minimo 8 caracteres, 1 numero, 1 letra e 1 caractere especial(!@#$%^&*)</span>
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirmação de senha</label>
+                <input type="password" name="password2" class="form-control" autocomplete="off" autocomplete="new-password" required id="id_password2" placeholder="Confirme a mesma senha">
+            <span>As senhas devem ser iguais</span>
+            </div>
+        
+            <!--button-->
+            <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+        
+            
+  
+            
+        
+            
+  
+            
+            
+  
+            
+        
+            
+  
+            
+            
+  
+            
+              
+    
+              
+      
+      
+      
+      
+      

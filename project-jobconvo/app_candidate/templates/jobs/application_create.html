@@ -1,0 +1,73 @@
+{% extends 'base_candidates.html' %}
+
+{% block title %}<title>Vagas para concorrer</title>{% endblock title %}
+
+{% block content %}
+
+<div class="container-sm" style="margin-top:8rem">
+    <div class="col-sm text-center">
+        <!--Nav-->
+        <h2>Olá {{ candidate.first_name }} {{ candidate.last_name }} !</h2><br>
+        <h3>Você esta concorrendo à vaga de {{ job.title }}</h3>
+    </div>
+    <form 
+    action="{% url 'app_candidate:application_in_jobs' pk=user.id jobs_id=job.id %}"
+    method="POST"
+    enctype="multipart/form-data">
+    <input type="hidden" value="MDQyQm8v1gInOzVFXw8x2bceUp2dsPwLvbO9XkXt3L4l1QqdKotK2WLxWCmcwKqc">      
+    {% csrf_token %}
+    <div class="form-content">
+    
+      
+          <div class="form-group">
+              <label for="id_minimum_schooling_candidate">Selecione sua escolaridade atual</label>
+              <select name="minimum_schooling_candidate" class="form-control" required id="id_minimum_schooling_candidate">
+      <option value="" selected>---------</option>
+    
+      <option value="Ensino Fundamental">Ensino Fundamental</option>
+    
+      <option value="Ensino Médio">Ensino Médio</option>
+    
+      <option value="Tecnólogo">Tecnólogo</option>
+    
+      <option value="Ensino Superior">Ensino Superior</option>
+    
+      <option value="Pós / MBA / Mestrado">Pós / MBA / Mestrado</option>
+    
+      <option value="Doutorado">Doutorado</option>
+    
+    </select>
+              
+    
+              
+          </div>
+      
+          <div class="form-group">
+              <label for="id_salary_range_candidate">Selecione sua pretensão salarial</label>
+              <select name="salary_range_candidate" class="form-control" required id="id_salary_range_candidate">
+      <option value="" selected>---------</option>
+    
+      <option value="Até R$ 1.000,00">Até R$ 1.000,00</option>
+    
+      <option value="De R$ 1.000,01 a R$ 2.000,00">De R$ 1.000,01 a R$ 2.000,00</option>
+    
+      <option value="De R$ 2.000,01 a R$ 3.000,00">De R$ 2.000,01 a R$ 3.000,00</option>
+    
+      <option value="Acima de R$ 3.000,00">Acima de R$ 3.000,00</option>
+    
+    </select>
+              
+    
+              
+          </div>
+      
+    </div>
+    <!--button-->
+    <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+    </form>
+</div>
+
+
+
+</div>
+{% endblock content %}

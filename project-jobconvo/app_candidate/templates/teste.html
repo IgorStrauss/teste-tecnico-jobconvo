@@ -1,0 +1,14 @@
+{% extends 'base_candidates.html' %}
+{% block content %}
+{% if jobs_list %}
+{% for job in jobs_list %}  <!-- Alteração: 'jobs' para 'job' -->
+<tr>
+    <td>{{ job.id }}</td>
+    <td>{{ job.company }}</td>
+    <td>{{ job.title }}</td>
+</tr>
+{% endfor %}
+{% else %}
+<h2>Não encontrado</h2>
+{% endif %}
+{% endblock content %}

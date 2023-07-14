@@ -1,73 +1,38 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends 'base_company.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+{% block title %}<title>Home | Company</title>{% endblock title %}
+{% block content %}
+{% include 'partials/_nav.html' %}
 
-    <title>Home | Companhia</title>
-</head>
-
-<body>
-    {% include 'partials/_nav.html' %}
-    <!-- Messages -->
-    <div class="row-sm col-sm-6 mt-2" style="display: flex; justify-content: center">
-        {% include 'partials/_messages.html' %}
-    </div>
-    <!-- End Messages -->
-
-    <div class="container-sm" style="border: 1px solid yellow">
-        <h1>Home - Resumo de vagas</h1>
-        <div class="row-sm">
-            <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Descrição da vaga</th>
-                    <th scope="col">Empresa</th>
-                    <th scope="col">QTD. candidatos</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"><a href="#" class="btn btn-primary btn-sm">ID</a></th>
-                    <td>desenvolvedor</td>
-                    <td>nomeabcdeas</td>
-                    <td>254</td>
-                  </tr>
-                  <!--modelo-->
-                  <tr>
-                    <th scope="row"><a href="#" class="btn btn-primary btn-sm">ID</a></th>
-                    <td>desenvolvedor</td>
-                    <td>nomeabcdeas</td>
-                    <td>254</td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><a href="#" class="btn btn-primary btn-sm">ID</a></th>
-                    <td>desenvolvedor</td>
-                    <td>nomeabcdeas</td>
-                    <td>254</td>
-                  </tr>
-
-
-                  <!--Fim modelo-->
-                </tbody>
-              </table>
-              
-        </div>
+  <div class="container-sm text-center">
+    <h1>Resumo de vagas abertas</h1>
+    <div class="row-sm">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">ID</th>
+            <th scope="col">Título</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Data de criação</th>
+            <th scope="col">QTD. candidatos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in jobs %}
+          <tr>
+            <th scope="row"><a href="{% url 'app_company:list_filter_job_company' job.id %}" class="btn btn-info btn-sm">Acessar</a></th>
+            <th scope="row">{{ job.id }}</th>
+            <td>{{ job.title }}</td>
+            <td>{{ job.company }}</td>
+            <td>{{ job.created_at }}</td>
+              <td>{{ job.num_candidates }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
     </div>
 
-    <!--JS-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
-        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
-        crossorigin="anonymous"></script>
-    <!--End JS-->
-</body>
-
-</html>
+  </div>
+{% endblock content %}
